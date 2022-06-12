@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        table, th, td {
+  border: 1px solid;
+}
+        table{
+            width: 100%;
+        }
+        thead{
+            margin: 0 auto;
+            width: 90%;
+        }
+        th{
+            color: black;
+            font-weight: bold;
+            width: 15%;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Class Marksheet</h1>
+        <p>
+            <label for="">Họ tên :</label>
+            <input type="text" id="hoten">
+        </p>
+        <p>
+            <label for="">Điểm toán :</label>
+            <input type="text" id="diemtoan">
+        </p>
+        <p>
+            <label for="">Điểm lý :</label>
+            <input type="text" id="diemly">
+        </p>
+        <p>
+            <label for="">Điểm hóa :</label>
+            <input type="text" id="diemhoa">
+        </p>
+        <p><button id="nhap">Nhập</button></p>
+    </div>
+    <table  id="storeList">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Họ và tên</th>
+                <th>Toán</th>
+                <th>Lý</th>
+                <th>Hóa</th>
+                <th>Trung bình</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+    <script>
+        var btNhap = document.getElementById('nhap');
+        var arr = [];
+        btNhap.addEventListener('click',function(e){
+            var nameInput = document.getElementById("hoten");
+            var toanInput = document.getElementById("diemtoan");
+            var lyInput = document.getElementById("diemly");
+            var hoaInput = document.getElementById("diemhoa");
+            var testScore = { 
+                name: nameInput.value,
+                math: toanInput.value,
+                physical: lyInput.value,
+                chemistry: hoaInput.value
+            };
+            renderTableData(testScore);
+        });
+        function renderTableData(data){
+            var table = document.getElementById('storeList').getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow(table.length);
+            var tb = ((parseFloat(data.math) + parseFloat(data.physical) + parseFloat(data.chemistry))/3.0).toFixed(2);
+            var kt = tb>=8;
+            console.log(kt);
+            if(kt){
+            var cell1 = newRow.insertCell(0);
+                cell1.innerHTML = arr.length + 1;
+                cell1.style.color= "#db0b0e";
+            var cell2 = newRow.insertCell(1);
+                cell2.innerHTML = data.name;
+                cell2.style.color= "#db0b0e";
+            var cell3 = newRow.insertCell(2);
+                cell3.innerHTML = data.math;
+                cell3.style.color= "#db0b0e";
+            var cell4 = newRow.insertCell(3);
+                cell4.innerHTML = data.physical;
+                cell4.style.color= "#db0b0e";
+            var cell5 = newRow.insertCell(4);
+                cell5.innerHTML = data.chemistry;
+                cell5.style.color= "#db0b0eed";
+            var cell6 = newRow.insertCell(5);
+                cell6.innerHTML = tb;
+                cell6.style.color= "#db0b0e";
+            }else{
+            var cell1 = newRow.insertCell(0);
+                cell1.innerHTML = arr.length + 1;
+            var cell2 = newRow.insertCell(1);
+                cell2.innerHTML = data.name;
+            var cell3 = newRow.insertCell(2);
+                cell3.innerHTML = data.math;
+            var cell4 = newRow.insertCell(3);
+                cell4.innerHTML = data.physical;
+            var cell5 = newRow.insertCell(4);
+                cell5.innerHTML = data.chemistry;
+            var cell6 = newRow.insertCell(5);
+                cell6.innerHTML = tb;
+            }
+            
+        }
+    </script>
+</body>
+</html>
